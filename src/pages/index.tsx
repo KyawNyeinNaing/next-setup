@@ -2,8 +2,20 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
+import { useAppDispatch, useTypedSelector } from '@/store/reducers';
+import { useEffect } from 'react';
+import { emit } from '@/store/actions/emit.actions';
 
 const Home: NextPage = () => {
+  const { isModal } = useTypedSelector(state => state.emit);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(emit.setEmit('IS_MODAL', true));
+  }, []);
+
+  console.log(isModal);
+
   return (
     <div className={styles.container}>
       <Head>
